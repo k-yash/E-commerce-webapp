@@ -1,0 +1,80 @@
+.card-v {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  width: 15.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-v:hover {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.content-card {
+  /* padding: 0rem 1rem 1rem 1rem; */
+  display: flex;
+  flex-direction: column;
+}
+
+.content-card > .div1,
+.div3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content-card > .div2 {
+  font-size: small;
+  margin: 0.5rem 0rem;
+  text-align: left;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.quantity-btn > button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding: 0.2rem 0.7rem;
+  margin: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 900;
+  border-radius: 4px;
+}
+
+.quantity-btn > button:hover {
+  background-color: #bcbcbc;
+}
+
+.cart-btn {
+  padding: 0.4rem 0.3rem;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-red {
+  background-color: #ff1e50;
+  margin-left: 0.2rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-blue {
+  background-color: #2b4296;
+  margin-left: 0.2rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-red-disabled {
+  background-color: #df5573;
+}
