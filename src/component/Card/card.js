@@ -17,7 +17,7 @@ export const Card = ({ item, type }) => {
       <img src={item.image} width="100%" height="auto" alt={item.productName} />
       <div className="content-card">
         <div className="div1">
-          <h4>{item.name}</h4>
+          <p>{item.name}</p>
           <p className="price">₹{item.price}</p>
         </div>
         <Rating rating={item.ratings} />

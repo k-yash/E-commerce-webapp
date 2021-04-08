@@ -127,3 +127,25 @@
   padding: 0rem;
   margin: 0rem;
 }
+
+.empty {
+  margin-top: 2rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #f9fafb;
+  text-align: center;
+  padding: 1rem;
+}
+
+.empty h2 {
+  margin-bottom: 0;
+  border-bottom: 1px solid #dddddd;
+}
+
+.empty p {
+  font-size: 0.9rem;
+  margin: 1rem;
+}

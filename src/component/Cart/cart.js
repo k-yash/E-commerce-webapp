@@ -20,29 +20,42 @@ export default function Cart() {
 
   return (
     <div className="content-page">
-      <h1>Items in cart</h1>
-      <div className="product-showcase">
-        {state.cartItems.map((item) => {
-          return <Card key={item.id} item={item} type="cart" />;
-        })}
-      </div>
-
-      <div className="cart-last">
-        <h2>
-          total Price: ₹<Subtotal />
-        </h2>
+      <h1>Your cart</h1>
+      {state.cartItems.length > 0 ? (
         <div>
-          <button
-            className="cart-btn btn-red"
-            onClick={() => dispatch({ type: "EMPTYCART" })}
-          >
-            EMPTY CART
-          </button>
-          <Link to="/billing" className="cart-btn btn-blue">
-            CHECKOUT
+          <div className="product-showcase">
+            {state.cartItems.map((item) => {
+              return <Card key={item.id} item={item} type="cart" />;
+            })}
+          </div>
+
+          <div className="cart-last">
+            <h2>
+              total Price: ₹<Subtotal />
+            </h2>
+            <div>
+              <button
+                className="cart-btn btn-red"
+                onClick={() => dispatch({ type: "EMPTYCART" })}
+              >
+                EMPTY CART
+              </button>
+              <Link to="/billing" className="cart-btn btn-blue">
+                CHECKOUT
+              </Link>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="empty">
+          <h2>Hey, it feels so light!</h2>
+          <p>There is nothing in your Cart. Let's add some items.</p>
+
+          <Link to="/products" className="cart-btn btn-red">
+            GO TO PRODUCTS
           </Link>
         </div>
-      </div>
+      )}
     </div>
   );
 }
