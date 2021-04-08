@@ -6,6 +6,7 @@ import Home from "./component/Home/home";
 import { NavBar } from "./component/Navigation/navbar";
 import { Billing } from "./component/Checkout/billing";
 import { Routes, Route } from "react-router-dom";
+import ErrorPage from "./component/errorpage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/billing" element={<Billing />} />
+          <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </div>
     </>

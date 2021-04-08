@@ -61,20 +61,20 @@
 
 .link-box {
   padding: 0.4rem;
-  width: 35%;
+  width: 41%;
 }
 
 .search-bar {
   width: 100%;
   padding: 0.4rem;
 }
-@media screen and (min-width: 774px) {
+@media screen and (min-width: 820px) {
   .mob-nav-box {
     display: none;
   }
 }
 
-@media screen and (max-width: 774px) {
+@media screen and (max-width: 820px) {
   .disable {
     display: none;
   }
@@ -104,6 +104,11 @@
   }
   .link-box {
     margin-right: 3rem;
+  }
+
+  .link-box {
+    padding: 0.4rem;
+    width: 60%;
   }
 }
 
