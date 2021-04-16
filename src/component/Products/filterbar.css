@@ -1,0 +1,30 @@
+.product-page-grid {
+  display: flex;
+}
+
+.filter-bar {
+  position: fixed;
+  width: 200px;
+  text-align: left;
+  height: 100%;
+  background-color: #f0f0f0;
+  padding: 0.5rem;
+}
+
+.filter-bar > div {
+  width: 100%;
+}
+
+.product-left {
+  margin-left: 200px;
+}
+
+@media screen and (max-width: 800px) {
+  .filter-bar {
+    display: none;
+  }
+
+  .product-showcase {
+    margin-left: 0px;
+  }
+}

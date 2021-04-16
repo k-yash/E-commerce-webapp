@@ -8,7 +8,7 @@ export const Billing = () => {
     <div className="content-page">
       <div className="row ">
         <div className="col-75">
-          <div className="container">
+          <div className="container-billing">
             <form action="/action_page.php">
               <div className="row">
                 <div className="col-50">
@@ -144,7 +144,7 @@ export const Billing = () => {
           </div>
         </div>
         <div class="col-25">
-          <div class="container">
+          <div class="container-billing">
             <h4>
               Cart
               <span class="price" style={{ color: "black" }}>

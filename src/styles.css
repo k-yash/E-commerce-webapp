@@ -42,7 +42,11 @@
   justify-content: space-around;
 }
 
-.active-link {
+.selected {
+  color: #f3756d;
+}
+
+.selected i {
   color: #f3756d;
 }
 
