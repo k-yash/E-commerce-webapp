@@ -11,6 +11,7 @@ export const NavBar = ({ setRoute }) => {
       <div className="nav-box">
         <Link to="/">
           <img className="nav-logo" src={commerce} alt="" />
+          THE PODKaRT
         </Link>
 
         <SearchBar setRoute={setRoute} />

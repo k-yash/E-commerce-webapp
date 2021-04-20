@@ -3,6 +3,7 @@ import { useCart } from "../../cartContext";
 import { Rating } from "./rating";
 import { Link } from "react-router-dom";
 
+
 export const Card = ({ item, type }) => {
   const {
     dispatch,
@@ -36,7 +37,7 @@ export const Card = ({ item, type }) => {
             ) : (
               <button
                 className="cart-btn btn-red"
-                onClick={() => dispatch({ type: "ADDTOCART", payload: item })}
+                onClick={() => {dispatch({ type: "ADDTOCART", payload: item });}}
               >
                 {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
               </button>
