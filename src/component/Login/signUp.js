@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { useAuth } from "../../authContext";
+import { useAuth } from "../../Contexts/authContext";
 import { useLocation, Link } from "react-router-dom";
 
+
 import "./login.css";
+import LoadingPage from "../loadingpage";
 
 
 export const SignUp = () => {
+  const {loading}= useAuth();
 
   const [formData, setFormData] = useState({
     name:"",
@@ -40,7 +43,7 @@ export const SignUp = () => {
   };
 
   return (
-
+    <>{loading?<LoadingPage/>:
     <div className="content-page show-flex">
     <div
       className={` container  ${activeContainer ? "right-panel-active" : ""}`}
@@ -99,6 +102,7 @@ export const SignUp = () => {
           </div>
         </div>
         </div>
-        </div>
+        </div>}
+        </>
   );
 };

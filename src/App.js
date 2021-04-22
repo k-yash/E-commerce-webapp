@@ -1,4 +1,5 @@
 import "./styles.css";
+// import {useEffect} from "react";
 import Cart from "./component/Cart/cart";
 import Products from "./component/Products/product";
 import Wishlist from "./component/Wishlist/wishlist";
@@ -10,8 +11,11 @@ import ErrorPage from "./component/errorpage";
 import { Login } from "./component/Login/login";
 import { SignUp } from "./component/Login/signUp";
 import { PrivateRoute } from "./component/PrivateRoute";
+import {toast} from "react-toastify";
 
+toast.configure();
 export default function App() {
+
   return (
     <>
       <div className="App">

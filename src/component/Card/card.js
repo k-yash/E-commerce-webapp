@@ -1,5 +1,5 @@
 import "./card.css";
-import { useCart } from "../../cartContext";
+import { useCart } from "../../Contexts/cartContext";
 import { Rating } from "./rating";
 import { Link } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export const Card = ({ item, type }) => {
           <p>{item.name}</p>
           <p className="price">₹{item.price}</p>
         </div>
-        <Rating rating={item.ratings} />
+        <Rating rating={item.rating} />
         {type === "productShowcase" && (
           <div className="div2">
             <p>{item.description}</p>

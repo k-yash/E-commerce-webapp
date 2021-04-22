@@ -1,5 +1,5 @@
 import "./filterbar.css";
-import { useProduct } from "../../productContext";
+import { useProduct } from "../../Contexts/productContext";
 
 const FilterBar = () => {
   const { dispatchProduct, showInventoryAll, fastDeliveryOnly } = useProduct();

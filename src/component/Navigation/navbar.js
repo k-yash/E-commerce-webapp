@@ -1,5 +1,5 @@
 import commerce from "./commerce.png";
-import { useCart } from "../../cartContext";
+import { useCart } from "../../Contexts/cartContext";
 import { SearchBar } from "./searchBar";
 import { Link, NavLink } from "react-router-dom";
 

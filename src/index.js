@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import { CartProvider } from "./cartContext";
-import { ProductProvider } from "./productContext";
+import { CartProvider } from "./Contexts/cartContext";
+import { ProductProvider } from "./Contexts/productContext";
 import { BrowserRouter as Router } from "react-router-dom";
-import { AuthProvider } from "./authContext";
+import { AuthProvider } from "./Contexts/authContext";
 
 import App from "./App";
 

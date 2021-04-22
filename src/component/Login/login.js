@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { useAuth } from "../../authContext";
+import { useAuth } from "../../Contexts/authContext";
 import { useLocation, Link} from "react-router-dom";
 import "./login.css";
+import LoadingPage from "../loadingpage";
 
 export const Login = () => {
+  const {loading}= useAuth();
+
   const [loginUser, setLoginUser] = useState({
     email:"",
     password:""
@@ -36,6 +39,8 @@ export const Login = () => {
   }
 // console.log(loginUser);
   return (
+    <>
+    {loading?<LoadingPage/>:
     <div className="content-page show-flex">
       <div
         className={` container  ${activeContainer ? "right-panel-active" : ""}`}
@@ -91,6 +96,8 @@ export const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
+  
 };

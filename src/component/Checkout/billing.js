@@ -1,5 +1,5 @@
 import "./billing.css";
-import { useCart } from "../../cartContext";
+import { useCart } from "../../Contexts/cartContext";
 import { Subtotal } from "../Cart/cart";
 
 export const Billing = () => {

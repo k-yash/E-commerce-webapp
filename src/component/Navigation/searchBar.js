@@ -1,4 +1,4 @@
-import { useProduct } from "../../productContext";
+import { useProduct } from "../../Contexts/productContext";
 import { Link } from "react-router-dom";
 
 export const SearchBar = () => {
