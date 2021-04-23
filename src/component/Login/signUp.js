@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../../Contexts/authContext";
 import { useLocation, Link } from "react-router-dom";
 
@@ -8,7 +8,11 @@ import LoadingPage from "../loadingpage";
 
 
 export const SignUp = () => {
+  const inputRef = useRef(null);
   const {loading}= useAuth();
+  const [activeContainer, setActiveContainer] = useState(true);
+  const { state } = useLocation();
+  const {createUserCredentials } = useAuth();
 
   const [formData, setFormData] = useState({
     name:"",
@@ -16,9 +20,52 @@ export const SignUp = () => {
     password:""
   });
 
-  const [activeContainer, setActiveContainer] = useState(true);
-  const { state } = useLocation();
-  const {createUserCredentials } = useAuth();
+  const [formError, setFormError] = useState({
+    name : "",
+    email : "",
+    password : ""
+  })
+
+  useEffect(() => {
+    inputRef.current.focus();
+  },[]);
+
+  const isValidEmail=(email)=>{
+    const emailRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+    return emailRegex.test(email);
+  }
+
+  const isValidPassword = (password) =>{
+    // const passwordRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+    // passwordRegex.test(password)
+    return (password.length>7);
+  }
+
+  const validateForm = () =>{
+    setFormError({
+      name : "",
+      email : "",
+      password : ""
+    })
+
+    let userValidate = true;
+     if(!formData.email || !isValidEmail){
+       setFormError((prev)=>({...prev, email: "Enter a valid Email" }))
+       userValidate = false;
+     }
+
+     if(!formData.password || !isValidPassword){
+      setFormError((prev)=>({...prev, password: "Password must be 8 characters long and should contain a number " }))
+      userValidate = false;
+    }
+    if(!formData.name){
+      setFormError((prev)=>({...prev, name: "Enter a valid name" }))
+      userValidate = false;
+    }
+
+    return userValidate;
+  }
+  
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -27,19 +74,16 @@ export const SignUp = () => {
   
   const inputEvent = (event) =>{
     const {value, name} = event.target;
-    if(name === "name"){
-      setFormData((prev)=> ({...prev, name:value}))
-    }else if(name==="email"){
-      setFormData((prev)=> ({...prev, email:value}))
-    }else{
-      setFormData((prev)=> ({...prev, password:value}))
-    }
+ 
+    setFormData((prev)=> ({...prev, [name]:value}))
 
   } 
 
 
   const signupHandler = () => {
+    if(validateForm()){
     createUserCredentials(formData);
+  }
   };
 
   return (
@@ -65,7 +109,9 @@ export const SignUp = () => {
               placeholder="Name"
               className="input-form "
               value={formData.name}
+              ref={inputRef}
             />
+            <small>{formError.name}</small>
             <input
               type="email"
               name="email"
@@ -74,6 +120,7 @@ export const SignUp = () => {
               className="input-form "
               value={formData.email}
             />
+            <small>{formError.email}</small>
             <input
               type="password"
               name="password"
@@ -82,6 +129,7 @@ export const SignUp = () => {
               className="input-form "
               value={formData.password}
             />
+            <small>{formError.password}</small>
             <button onClick={()=>{signupHandler()}} className="button-form">SignUp</button>
           </form>
         </div>

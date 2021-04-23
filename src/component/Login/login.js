@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../Contexts/authContext";
 import { useLocation, Link} from "react-router-dom";
 import "./login.css";
 import LoadingPage from "../loadingpage";
 
 export const Login = () => {
+  const inputRef = useRef(null);
   const {loading}= useAuth();
 
   const [loginUser, setLoginUser] = useState({
@@ -12,10 +13,19 @@ export const Login = () => {
     password:""
   })
   
+  const [formError, setFormError] = useState({
+    email : "",
+    password : ""
+  })
+
 
   const [activeContainer, setActiveContainer] = useState(false);
   const { state } = useLocation();
   const { AuthenticateWithCredentials } = useAuth();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  },[]);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -23,20 +33,39 @@ export const Login = () => {
 
   const inputEvent = (event) => {
     const {value, name} = event.target;
-    if(name==="email"){
-      setLoginUser((prev)=>({...prev, email:value}));
-    }else{
-      setLoginUser((prev)=>({...prev, password:value}));
-    }
-    // 
-    // 
+
+    setLoginUser((prev)=>({...prev, [name]:value}));
+
   };
 
+  const validateForm = () =>{
+    setFormError({
+      email : "",
+      password : ""
+    })
+    let userValidate = true;
+     if(!loginUser.email){+
+       setFormError((prev)=>({...prev, email: "Enter a valid email" }))
+       userValidate = false;
+     }
+
+     if(!loginUser.password){
+      setFormError((prev)=>({...prev, password: "Enter a valid password" }))
+      userValidate = false;
+    }
+
+    return userValidate;
+  }
+
   const loginHandler = () =>{
+    if(validateForm()){
     const from = state?.from ? state.from : "/";
     AuthenticateWithCredentials(loginUser, from);
-    
   }
+}
+    
+    
+
 // console.log(loginUser);
   return (
     <>
@@ -60,17 +89,22 @@ export const Login = () => {
             <input
               onChange={inputEvent}
               className="input-form "
+              value = {loginUser.email}
               type="email"
               name="email"
               placeholder="Email"
+              ref={inputRef}
             />
+            <small>{formError.email}</small>
             <input
               onChange={inputEvent}
               className="input-form "
+              value = {loginUser.password}
               type="password"
               name="password"
               placeholder="Password"
             />
+            <small>{formError.password}</small>
             {/* <a href="#">Forgot Your Password</a> */}
 
             <button className="button-form" onClick={() => loginHandler()}>

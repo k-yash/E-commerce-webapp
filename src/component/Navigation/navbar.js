@@ -2,9 +2,16 @@ import commerce from "./commerce.png";
 import { useCart } from "../../Contexts/cartContext";
 import { SearchBar } from "./searchBar";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../../Contexts/authContext";
 
 export const NavBar = ({ setRoute }) => {
   const { state } = useCart();
+  const {isUserLogin, setLogin} = useAuth();
+
+  const logout =() =>{
+    setLogin(false);
+    localStorage.removeItem("AuthForEcomm");
+  }
 
   return (
     <div>
@@ -15,6 +22,17 @@ export const NavBar = ({ setRoute }) => {
         </Link>
 
         <SearchBar setRoute={setRoute} />
+
+        {!isUserLogin?
+            <NavLink activeClassName="selected" to="/login" className="nav-btn">
+              Login
+            </NavLink>
+          : <div className="right-menu">
+            <button className="username-btn">Hi, {JSON.parse(localStorage.getItem("AuthForEcomm")).userName}</button>
+            <div className="dropdown-menu"><button onClick={()=>{logout()}}>Log Out</button></div>
+            </div> 
+          }
+
         <ul className="navigation disable">
           <li>
             <NavLink
@@ -53,11 +71,8 @@ export const NavBar = ({ setRoute }) => {
             </NavLink>
           </li>
 
-          <li>
-            <NavLink activeClassName="selected" to="/login" className="nav-btn">
-              Login
-            </NavLink>
-          </li>
+          
+
         </ul>
       </div>
       <div className="mobile-nav-bar">

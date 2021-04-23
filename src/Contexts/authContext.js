@@ -1,9 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { useState } from "react";
 import {successToast, errorToast} from "../component/Card/toast";
-// import { fakeAuthApi } from "./fakeAuthApi";
 import { useNavigate } from "react-router-dom";
-// import { Users } from "./fakeAuthApi";
 import axios from "axios";
 
 export const AuthContext = createContext();
@@ -48,16 +46,16 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const {data} = await axios.post("https://podkart.yash2018.repl.co/login",user);
-      // console.log(response);
+      console.log(data.name);
       if(data.success){
+        localStorage.setItem("AuthForEcomm",JSON.stringify({"isUserLoggedIn":data.success, "userName": data.name}));
         setLogin(true);
         successToast("Login Successful!");
         navigate(from);
-      }else{
-
       }
     } catch (err) {
       errorToast("User not found!")
+      localStorage.removeItem("AuthForEcomm");
       setLogin(false);
     }finally{
       setLoading(false);
@@ -66,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isUserLogin, AuthenticateWithCredentials, createUserCredentials, loading, setLoading }}
+      value={{ isUserLogin,setLogin, AuthenticateWithCredentials, createUserCredentials, loading, setLoading }}
     >
       {children}
     </AuthContext.Provider>

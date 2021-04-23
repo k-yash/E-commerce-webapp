@@ -1,5 +1,5 @@
 import "./styles.css";
-// import {useEffect} from "react";
+import {useEffect} from "react";
 import Cart from "./component/Cart/cart";
 import Products from "./component/Products/product";
 import Wishlist from "./component/Wishlist/wishlist";
@@ -12,9 +12,24 @@ import { Login } from "./component/Login/login";
 import { SignUp } from "./component/Login/signUp";
 import { PrivateRoute } from "./component/PrivateRoute";
 import {toast} from "react-toastify";
+import { useAuth } from "./Contexts/authContext";
 
 toast.configure();
 export default function App() {
+  
+  const {setLogin} = useAuth();
+
+  useEffect(() => {
+    
+    if(localStorage.getItem("AuthForEcomm")){
+
+    const {isUserLoggedIn} = JSON.parse(localStorage.getItem("AuthForEcomm"));
+    setLogin(isUserLoggedIn);
+    }else{
+      setLogin(false);
+    }
+    
+  }, [])
 
   return (
     <>
@@ -24,8 +39,6 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
-          {/* <Route path="/wishlist" element={<Wishlist />} /> */}
-          {/* <Route path="/billing" element={<Billing />} /> */}
           <Route path="/*" element={<ErrorPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
