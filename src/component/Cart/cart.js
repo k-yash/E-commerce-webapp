@@ -1,10 +1,14 @@
 import "../Card/card.css";
 import { useCart } from "../../Contexts/cartContext";
-import { Card } from "../Card/card";
+import  CartCard  from "./cartCard";
 import { Link } from "react-router-dom";
+
+import {useEffect} from "react";
+import {useAuth} from "../../Contexts/authContext";
 
 export const Subtotal = () => {
   const { state } = useCart();
+ 
   return (
     <span>
       {state.cartItems.reduce(
@@ -15,17 +19,21 @@ export const Subtotal = () => {
   );
 };
 
+
+
 export default function Cart() {
   const { state, dispatch } = useCart();
+  
 
   return (
     <div className="content-page">
       <h1>Your cart</h1>
+      {console.log({state})}
       {state.cartItems.length > 0 ? (
         <div>
           <div className="product-showcase">
-            {state.cartItems.map((item) => {
-              return <Card key={item.id} item={item} type="cart" />;
+            {state.cartItems.map(({product, quantity}) => {
+              return <CartCard key={product.id} product={product} quantity = {quantity} />;
             })}
           </div>
 

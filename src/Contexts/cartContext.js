@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 import {cartReducer} from "../Reducers/cartReducer";
-import {ifPresentCart,ifPresentWishlist, cartHandler, wishListHandler, productHandler} from "./utilities/utilityFunction";
+import {ifPresentCart,ifPresentWishlist, cartHandler, wishListHandler, productHandler} from "./utilities/restApiCalls";
 export const CartContext = createContext();
 
 

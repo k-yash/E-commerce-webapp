@@ -46,9 +46,9 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const {data} = await axios.post("https://podkart.yash2018.repl.co/login",user);
-      console.log(data.name);
+      console.log(data);
       if(data.success){
-        localStorage.setItem("AuthForEcomm",JSON.stringify({"isUserLoggedIn":data.success, "userName": data.name}));
+        localStorage.setItem("AuthForEcomm",JSON.stringify({"userId":data.userId ,"isUserLoggedIn":data.success, "userName": data.name}));
         setLogin(true);
         successToast("Login Successful!");
         navigate(from);

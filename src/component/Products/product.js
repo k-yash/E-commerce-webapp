@@ -23,7 +23,7 @@ export default function Products({ setRoute }) {
       setLoading(true);
       try{
         const {data} = await axios.get("https://podkart.yash2018.repl.co/products")
-        console.log({data});
+        // console.log({data});
         setData(data.products);
         successToast("Products loded successfully");
         dispatchProduct({type:"ADD_PRODUCTS", payload:data.products})

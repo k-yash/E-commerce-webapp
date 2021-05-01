@@ -1,5 +1,12 @@
 export const cartReducer = (state, action) => {
     switch (action.type) {
+
+      case "SETCART":
+        return {
+          ...state, cartItems:action.payload
+        }
+
+
       case "ADDTOCART":
         return {
           ...state,

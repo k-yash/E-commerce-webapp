@@ -13,11 +13,17 @@ import { SignUp } from "./component/Login/signUp";
 import { PrivateRoute } from "./component/PrivateRoute";
 import {toast} from "react-toastify";
 import { useAuth } from "./Contexts/authContext";
+import {useCart} from "./Contexts/cartContext";
+import axios from "axios";
 
 toast.configure();
 export default function App() {
   
-  const {setLogin} = useAuth();
+  const {isUserLogin, setLogin} = useAuth();
+  const {dispatch} = useCart();
+
+
+
 
   useEffect(() => {
     
@@ -30,6 +36,31 @@ export default function App() {
     }
     
   }, [])
+
+
+  useEffect(() => {
+    if(isUserLogin){
+
+      const userId = JSON.parse(localStorage.getItem("AuthForEcomm")).userId;
+      // console.log(userId)
+
+      (async()=>{
+        try{
+          const {data} = await axios.get(`https://podkart.yash2018.repl.co/cart/${userId}`)
+          if(data.success){
+            console.log(data.response.cartProducts);
+            dispatch({type:"SETCART", payload:data.response.cartProducts})
+
+          }
+        }catch(error){
+          console.log(error);
+        }
+      })();
+    }else{
+      dispatch({type:"SETCART", payload:[]})
+    }
+    
+  }, [isUserLogin])
 
   return (
     <>
