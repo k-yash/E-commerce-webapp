@@ -10,7 +10,7 @@ export const cartReducer = (state, action) => {
       case "ADDTOCART":
         return {
           ...state,
-          cartItems: [...state.cartItems, { ...action.payload, quantity: 1 }]
+          cartItems: [...state.cartItems, { product:action.payload, quantity: 1 }]
         };
   
       case "ADDTOWISHLIST":
@@ -44,7 +44,7 @@ export const cartReducer = (state, action) => {
         return {
           ...state,
           cartItems: state.cartItems.map((item) =>
-            item.id === action.payload
+            item.product.id === action.payload
               ? { ...item, quantity: item.quantity + 1 }
               : item
           )
@@ -55,14 +55,14 @@ export const cartReducer = (state, action) => {
           return {
             ...state,
             cartItems: state.cartItems.filter(
-              (item) => item.id !== action.payload.id
+              (item) => item.product.id !== action.payload.id
             )
           };
         }
         return {
           ...state,
           cartItems: state.cartItems.map((item) =>
-            item.id === action.payload.id
+            item.product.id === action.payload.id
               ? { ...item, quantity: item.quantity - 1 }
               : item
           )
@@ -71,7 +71,7 @@ export const cartReducer = (state, action) => {
       case "REMOVE":
         return {
           ...state,
-          cartItems: state.cartItems.filter((item) => item.id !== action.payload)
+          cartItems: state.cartItems.filter((item) => item.product.id !== action.payload)
         };
   
       case "EMPTYCART":

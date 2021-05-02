@@ -1,5 +1,5 @@
 import { useCart } from "../../Contexts/cartContext";
-import { Card } from "../Card/card";
+import { WishlistCard } from "./wishlistCard";
 import { Link } from "react-router-dom";
 
 export default function Cart() {
@@ -11,7 +11,7 @@ export default function Cart() {
       {state.wishlist.length > 0 ? (
         <div className="product-showcase">
           {state.wishlist.map((item) => {
-            return <Card key={item.id} item={item} type="wishList" />;
+            return <WishlistCard key={item.product.id} product={item.product} quantity = {item.quantity} />;
           })}
         </div>
       ) : (

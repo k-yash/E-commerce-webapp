@@ -1,19 +1,43 @@
 import axios from "axios";
 const BackendApi = "https://podkart.yash2018.repl.co";
-export const restApiCalls = async(method, route, data) =>{
+
+export const restApiCalls = async(method, route, data = null) =>{
     switch (method) {
-        case GET:
+        case "GET":{
             try{
-                const res = axios.get(`${BackendApi}/${route}`);
-            }catch(error){
+                const res = await axios.get(`${BackendApi}/${route}`);
+                console.log(res)
+                if(res.status == 200){
+                    return res.data;
+                }
+            }catch(err){
+                return {success:false, error : err}
 
             }
-            
+        }
+        case "POST":{
+            try{
+                console.log(`${BackendApi}/${route}`, data)
+                const res = await axios.post(`${BackendApi}/${route}`, data);
+                return res.data;
+            }catch(err){
+                return {success:false, error:err}
 
-            
-            break;
+            }
+        }
+
+        case "DELETE":{
+            try{
+                const res = await axios.delete(`${BackendApi}/${route}`);
+                return res.data;
+
+            }catch(err){
+                return {success:false, error:err}
+            }
+        }
+
     
         default:
-            break;
+            return "Not a valid call";
     }
 }

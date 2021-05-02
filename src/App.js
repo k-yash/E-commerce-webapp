@@ -19,13 +19,14 @@ import axios from "axios";
 toast.configure();
 export default function App() {
   
-  const {isUserLogin, setLogin} = useAuth();
+  const {isUserLogin, setLogin,user, setUser} = useAuth();
   const {dispatch} = useCart();
 
 
 
 
   useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("AuthForEcomm")))
     
     if(localStorage.getItem("AuthForEcomm")){
 
@@ -35,18 +36,18 @@ export default function App() {
       setLogin(false);
     }
     
-  }, [])
+  }, [isUserLogin])
 
 
   useEffect(() => {
     if(isUserLogin){
-
-      const userId = JSON.parse(localStorage.getItem("AuthForEcomm")).userId;
+     
+      // const userId = JSON.parse(localStorage.getItem("AuthForEcomm")).userId;
       // console.log(userId)
 
       (async()=>{
         try{
-          const {data} = await axios.get(`https://podkart.yash2018.repl.co/cart/${userId}`)
+          const {data} = await axios.get(`https://podkart.yash2018.repl.co/cart/${user.userId}`)
           if(data.success){
             console.log(data.response.cartProducts);
             dispatch({type:"SETCART", payload:data.response.cartProducts})

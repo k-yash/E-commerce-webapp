@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
   const wishlist = [];
 
   const ifPresentCart = (id) => {
-    const val = state.cartItems.some((item) => item.id === id);
+    const val = state.cartItems.some((item) => item.product.id === id);
     return val;
   };
 

@@ -20,6 +20,11 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [isUserLogin, setLogin] = useState(false);
+  const [user, setUser] = useState({
+    userId:"",
+    userName:"",
+    isUserLoggedIn:""
+  })
   const navigate = useNavigate();
   // const [state, dispatch] = useReducer(authReducer, { Users });
 
@@ -49,6 +54,7 @@ export const AuthProvider = ({ children }) => {
       console.log(data);
       if(data.success){
         localStorage.setItem("AuthForEcomm",JSON.stringify({"userId":data.userId ,"isUserLoggedIn":data.success, "userName": data.name}));
+       
         setLogin(true);
         successToast("Login Successful!");
         navigate(from);
@@ -64,7 +70,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isUserLogin,setLogin, AuthenticateWithCredentials, createUserCredentials, loading, setLoading }}
+      value={{user,setUser, isUserLogin,setLogin, AuthenticateWithCredentials, createUserCredentials, loading, setLoading }}
     >
       {children}
     </AuthContext.Provider>

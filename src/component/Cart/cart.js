@@ -12,7 +12,7 @@ export const Subtotal = () => {
   return (
     <span>
       {state.cartItems.reduce(
-        (acc, value) => acc + value.price * value.quantity,
+        (acc, value) => acc + value.product.price * value.quantity,
         0
       )}
     </span>
@@ -23,6 +23,7 @@ export const Subtotal = () => {
 
 export default function Cart() {
   const { state, dispatch } = useCart();
+  // console.log(state);
   
 
   return (

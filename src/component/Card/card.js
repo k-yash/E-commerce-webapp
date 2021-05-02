@@ -2,6 +2,8 @@ import "./card.css";
 import { useCart } from "../../Contexts/cartContext";
 import { Rating } from "./rating";
 import { Link } from "react-router-dom";
+import {restApiCalls} from "../../Contexts/utilities/restApiCalls";
+import {useAuth} from "../../Contexts/authContext";
 
 
 export const Card = ({ item, type }) => {
@@ -12,6 +14,15 @@ export const Card = ({ item, type }) => {
     cartHandler,
     wishListHandler
   } = useCart();
+
+  const {user} = useAuth();
+
+  const addToCart = async() => {
+    dispatch({ type: "ADDTOCART", payload: item });
+    const response = await restApiCalls("POST",`cart/${user.userId}`,{productId: item.id})
+    console.log({response})
+
+  }
 
   return (
     <div className="card-v" key={item.id}>
@@ -37,7 +48,7 @@ export const Card = ({ item, type }) => {
             ) : (
               <button
                 className="cart-btn btn-red"
-                onClick={() => {dispatch({ type: "ADDTOCART", payload: item });}}
+                onClick={() => addToCart()}
               >
                 {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
               </button>
@@ -63,7 +74,7 @@ export const Card = ({ item, type }) => {
           </div>
         )}
 
-        {type === "cart" && (
+        {/* {type === "cart" && (
           <div className="div4">
             <div className="quantity-btn">
               <button
@@ -98,9 +109,9 @@ export const Card = ({ item, type }) => {
               Remove
             </button>
           </div>
-        )}
+        )} */}
 
-        {type === "wishList" && (
+        {/* {type === "wishList" && (
           <div>
             <button
               className="cart-btn btn-blue"
@@ -117,7 +128,7 @@ export const Card = ({ item, type }) => {
               Remove
             </button>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import React from 'react'
 import {Rating} from "../Card/rating";
 import {useCart} from "../../Contexts/cartContext";
-
+import {restApiCalls} from "../../Contexts/utilities/restApiCalls";
+import {useAuth} from "../../Contexts/authContext";
 const CartCard = ({product, quantity}) => {
 
     const {
@@ -11,6 +12,33 @@ const CartCard = ({product, quantity}) => {
         cartHandler,
         wishListHandler
       } = useCart();
+
+    const {user} = useAuth();
+
+    const incrementQuantity= async() => {
+        dispatch({ type: "INCREMENT", payload: product.id });
+        // console.log(product.id)
+        const response = await restApiCalls("POST",`cart/${user.userId}/${product.id}`,{qty: quantity+1})
+        // console.log(response)
+    }
+
+    const decrementQuantity=  async() => {
+        dispatch({ type: "DECREMENT", payload: {id:product.id, quantity:quantity} });
+        if(quantity==1){
+            const response = await restApiCalls("DELETE",`cart/${user.userId}/${product.id}`)
+        }else{
+            const response = await restApiCalls("POST",`cart/${user.userId}/${product.id}`,{qty: quantity-1})
+        }
+        
+
+    }
+
+    const removeHandler = async() => {
+        dispatch({ type: "REMOVE", payload: product.id })
+        const response = await restApiCalls("DELETE",`cart/${user.userId}/${product.id}`)
+        // console.log(response)
+    }
+    
 
     return (
         <div className="card-v" key={product.id}>
@@ -25,20 +53,13 @@ const CartCard = ({product, quantity}) => {
                 <div className="div4">
                     <div className="quantity-btn">
                         <button
-                        onClick={() => {
-                            dispatch({ type: "INCREMENT", payload: product.id });
-                        }}
+                        onClick={() => {incrementQuantity()}}
                         >
                         +
                         </button>
                         {quantity}
                         <button
-                        onClick={() => {
-                            dispatch({
-                            type: "DECREMENT",
-                            payload: { id: product.id, quantity: quantity }
-                            });
-                        }}
+                        onClick={() => {decrementQuantity()}}
                         >
                         -
                         </button>
@@ -51,7 +72,7 @@ const CartCard = ({product, quantity}) => {
                     </button>
                     <button
                         className="cart-btn btn-red"
-                        onClick={() => dispatch({ type: "REMOVE", payload: product.id })}
+                        onClick={() => removeHandler()}
                     >
                         Remove
                     </button>

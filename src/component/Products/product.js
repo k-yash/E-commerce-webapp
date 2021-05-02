@@ -9,6 +9,7 @@ import axios from "axios";
 import FilterBar from "./filterbar";
 import LoadingPage from "../loadingpage";
 import { useAuth } from "../../Contexts/authContext";
+import {restApiCalls} from "../../Contexts/utilities/restApiCalls";
 // import {toast} from "react-toastify";
 
 
@@ -22,11 +23,11 @@ export default function Products({ setRoute }) {
     (async()=>{
       setLoading(true);
       try{
-        const {data} = await axios.get("https://podkart.yash2018.repl.co/products")
-        // console.log({data});
-        setData(data.products);
+        const response = await restApiCalls("GET","products"); 
+        console.log(response);
+        setData(response.products);
         successToast("Products loded successfully");
-        dispatchProduct({type:"ADD_PRODUCTS", payload:data.products})
+        dispatchProduct({type:"ADD_PRODUCTS", payload:response.products})
 
       }catch(err){
         console.log("Page cannot be loaded");

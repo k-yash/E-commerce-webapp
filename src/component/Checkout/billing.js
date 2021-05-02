@@ -160,8 +160,8 @@ export const Billing = () => {
             {state.cartItems.map((item) => {
               return (
                 <p>
-                  <a href="#Billing">{item.name}</a> x {item.quantity}{" "}
-                  <span class="price">₹{item.price * item.quantity}</span>
+                  <a href="#Billing">{item.product.name}</a> x {item.quantity}{" "}
+                  <span class="price">₹{item.product.price * item.quantity}</span>
                 </p>
               );
             })}
