@@ -15,32 +15,18 @@ export const CartProvider = ({ children }) => {
   };
 
  const ifPresentWishlist = (id) => {
-    const val = state.wishlist.some((item) => item.id === id);
+    const val = state.wishlist.some((item) => item.product.id === id);
     return val;
   };
 
- const cartHandler = (item) => {
-    if (ifPresentWishlist(item.id)) {
-      dispatch({ type: "REMOVE", payload: item.id });
-    } else {
-      dispatch({ type: "MOVETOWISHLIST", payload: item });
-    }
-  };
 
- const wishListHandler = (item) => {
-    if (ifPresentCart(item.id)) {
-      dispatch({ type: "REMOVEFROMWISHLIST", payload: item.id });
-    } else {
-      dispatch({ type: "MOVETOCART", payload: item });
-    }
-  };
 
- const productHandler = (item) => {
-    const val = ifPresentCart(item.id);
-    val
-      ? dispatch({ type: "INCREMENT", payload: item.id })
-      : dispatch({ type: "ADDTOCART", payload: item });
-  };
+//  const productHandler = (item) => {
+//     const val = ifPresentCart(item.id);
+//     val
+//       ? dispatch({ type: "INCREMENT", payload: item.id })
+//       : dispatch({ type: "ADDTOCART", payload: item });
+//   };
 
   
 
@@ -53,10 +39,10 @@ export const CartProvider = ({ children }) => {
         state,
         dispatch,
         ifPresentCart,
-        ifPresentWishlist,
-        cartHandler,
-        wishListHandler,
-        productHandler
+        ifPresentWishlist
+        // cartHandler,
+        // wishListHandler,
+        // productHandler
       }}
     >
       {children}

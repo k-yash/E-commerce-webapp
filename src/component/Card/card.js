@@ -24,6 +24,19 @@ export const Card = ({ item, type }) => {
 
   }
 
+  const addToWishlist = async() => {
+    if(ifPresentWishlist(item.id)){
+      dispatch({ type: "REMOVEFROMWISHLIST", payload: item.id});
+      const response = await restApiCalls("DELETE", `wishlist/${user.userId}/${item.id}`);
+      console.log({response})
+    }else{
+      dispatch({ type: "ADDTOWISHLIST", payload: item });
+      const response = await restApiCalls("POST", `wishlist/${user.userId}`, {productId: item.id});
+      console.log({response})
+
+    }
+  }
+
   return (
     <div className="card-v" key={item.id}>
       <img src={item.image} width="100%" height="auto" alt={item.productName} />
@@ -55,18 +68,7 @@ export const Card = ({ item, type }) => {
             )}
 
             <i
-              onClick={
-                ifPresentWishlist(item.id)
-                  ? () => {
-                      dispatch({
-                        type: "REMOVEFROMWISHLIST",
-                        payload: item.id
-                      });
-                    }
-                  : () => {
-                      dispatch({ type: "ADDTOWISHLIST", payload: item });
-                    }
-              }
+              onClick={() => addToWishlist() }
               className="fa fa-heart"
               aria-hidden="true"
               style={{ color: ifPresentWishlist(item.id) ? "red" : "grey" }}

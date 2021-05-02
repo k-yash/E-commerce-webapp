@@ -11,7 +11,7 @@ export default function Cart() {
       {state.wishlist.length > 0 ? (
         <div className="product-showcase">
           {state.wishlist.map((item) => {
-            return <WishlistCard key={item.product.id} product={item.product} quantity = {item.quantity} />;
+            return <WishlistCard key={item.product.id} product={item.product} />;
           })}
         </div>
       ) : (

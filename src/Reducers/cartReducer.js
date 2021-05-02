@@ -5,7 +5,11 @@ export const cartReducer = (state, action) => {
         return {
           ...state, cartItems:action.payload
         }
-
+      
+      case "SETWISHLIST":
+        return {
+          ...state, wishlist:action.payload
+        }  
 
       case "ADDTOCART":
         return {
@@ -14,29 +18,30 @@ export const cartReducer = (state, action) => {
         };
   
       case "ADDTOWISHLIST":
-        return { ...state, wishlist: [...state.wishlist, { ...action.payload }] };
+        return { ...state, wishlist: [...state.wishlist, {product : action.payload }] };
   
       case "REMOVEFROMWISHLIST":
         return {
           ...state,
-          wishlist: state.wishlist.filter((item) => item.id !== action.payload)
+          wishlist: state.wishlist.filter((item) => item.product.id !== action.payload)
         };
   
       case "MOVETOCART":
         return {
           ...state,
           wishlist: state.wishlist.filter(
-            (item) => item.id !== action.payload.id
+            (item) => item.product.id !== action.payload.id
           ),
-          cartItems: [...state.cartItems, { ...action.payload, quantity: 1 }]
+          cartItems: [...state.cartItems, { product:action.payload, quantity: 1 }]
         };
+        
       case "MOVETOWISHLIST":
         return {
           ...state,
-          wishlist: [...state.wishlist, { ...action.payload }],
+          wishlist: [...state.wishlist, { product : action.payload }],
   
           cartItems: state.cartItems.filter(
-            (item) => item.id !== action.payload.id
+            (item) => item.product.id !== action.payload.id
           )
         };
   

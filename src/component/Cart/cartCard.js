@@ -5,21 +5,12 @@ import {restApiCalls} from "../../Contexts/utilities/restApiCalls";
 import {useAuth} from "../../Contexts/authContext";
 const CartCard = ({product, quantity}) => {
 
-    const {
-        dispatch,
-        ifPresentCart,
-        ifPresentWishlist,
-        cartHandler,
-        wishListHandler
-      } = useCart();
-
+    const { dispatch, ifPresentWishlist } = useCart();
     const {user} = useAuth();
 
     const incrementQuantity= async() => {
         dispatch({ type: "INCREMENT", payload: product.id });
-        // console.log(product.id)
         const response = await restApiCalls("POST",`cart/${user.userId}/${product.id}`,{qty: quantity+1})
-        // console.log(response)
     }
 
     const decrementQuantity=  async() => {
@@ -29,14 +20,27 @@ const CartCard = ({product, quantity}) => {
         }else{
             const response = await restApiCalls("POST",`cart/${user.userId}/${product.id}`,{qty: quantity-1})
         }
-        
 
     }
 
+    const cartHandler = async(product) => {
+        if (ifPresentWishlist(product.id)) {
+          dispatch({ type: "REMOVE", payload: product.id });
+          const response = await restApiCalls("DELETE",`cart/${user.userId}/${product.id}`);
+        } else {
+          dispatch({ type: "MOVETOWISHLIST", payload: product });
+          const response = await restApiCalls("DELETE",`cart/${user.userId}/${product.id}`);
+          if(response.success){
+              const response = await restApiCalls("POST", `wishlist/${user.userId}`, {productId: product.id});
+          }
+
+        }
+      };
+
     const removeHandler = async() => {
-        dispatch({ type: "REMOVE", payload: product.id })
-        const response = await restApiCalls("DELETE",`cart/${user.userId}/${product.id}`)
-        // console.log(response)
+        dispatch({ type: "REMOVE", payload: product.id });
+        const response = await restApiCalls("DELETE",`cart/${user.userId}/${product.id}`);
+
     }
     
 

@@ -63,6 +63,30 @@ export default function App() {
     
   }, [isUserLogin])
 
+  useEffect(() => {
+    if(isUserLogin){
+     
+      // const userId = JSON.parse(localStorage.getItem("AuthForEcomm")).userId;
+      // console.log(userId)
+
+      (async()=>{
+        try{
+          const {data} = await axios.get(`https://podkart.yash2018.repl.co/wishlist/${user.userId}`)
+          if(data.success){
+            console.log(data.response);
+            dispatch({type:"SETWISHLIST", payload:data.response.wishlistProducts})
+
+          }
+        }catch(error){
+          console.log(error);
+        }
+      })();
+    }else{
+      dispatch({type:"SETWISHLIST", payload:[]})
+    }
+    
+  }, [isUserLogin])
+
   return (
     <>
       <div className="App">
