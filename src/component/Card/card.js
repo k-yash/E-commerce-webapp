@@ -4,15 +4,14 @@ import { Rating } from "./rating";
 import { Link } from "react-router-dom";
 import {restApiCalls} from "../../Contexts/utilities/restApiCalls";
 import {useAuth} from "../../Contexts/authContext";
+import { successToast, errorToast, infoToast } from "./toast";
 
 
-export const Card = ({ item, type }) => {
+export const Card = ({item}) => {
   const {
     dispatch,
     ifPresentCart,
     ifPresentWishlist,
-    cartHandler,
-    wishListHandler
   } = useCart();
 
   const {user} = useAuth();
@@ -46,13 +45,13 @@ export const Card = ({ item, type }) => {
           <p className="price">₹{item.price}</p>
         </div>
         <Rating rating={item.rating} />
-        {type === "productShowcase" && (
+        
           <div className="div2">
             <p>{item.description}</p>
           </div>
-        )}
+        
 
-        {type === "productShowcase" && (
+        
           <div className="div3">
             {ifPresentCart(item.id) ? (
               <Link to="/cart" className="cart-btn btn-red">
@@ -61,76 +60,20 @@ export const Card = ({ item, type }) => {
             ) : (
               <button
                 className="cart-btn btn-red"
-                onClick={() => addToCart()}
+                onClick={() => {user.isUserLoggedIn?addToCart():infoToast("Please login first!")}}
               >
                 {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
               </button>
             )}
 
             <i
-              onClick={() => addToWishlist() }
+              onClick={() => {user.isUserLoggedIn?addToWishlist():infoToast("Please login first!")} }
               className="fa fa-heart"
               aria-hidden="true"
               style={{ color: ifPresentWishlist(item.id) ? "red" : "grey" }}
             ></i>
           </div>
-        )}
-
-        {/* {type === "cart" && (
-          <div className="div4">
-            <div className="quantity-btn">
-              <button
-                onClick={() => {
-                  dispatch({ type: "INCREMENT", payload: item.id });
-                }}
-              >
-                +
-              </button>
-              {item.quantity}
-              <button
-                onClick={() => {
-                  dispatch({
-                    type: "DECREMENT",
-                    payload: { id: item.id, quantity: item.quantity }
-                  });
-                }}
-              >
-                -
-              </button>
-            </div>
-            <button
-              className="cart-btn btn-blue"
-              onClick={() => cartHandler(item)}
-            >
-              Move to Wishlist
-            </button>
-            <button
-              className="cart-btn btn-red"
-              onClick={() => dispatch({ type: "REMOVE", payload: item.id })}
-            >
-              Remove
-            </button>
-          </div>
-        )} */}
-
-        {/* {type === "wishList" && (
-          <div>
-            <button
-              className="cart-btn btn-blue"
-              onClick={() => wishListHandler(item)}
-            >
-              Move to Cart
-            </button>
-            <button
-              className="cart-btn btn-red"
-              onClick={() =>
-                dispatch({ type: "REMOVEFROMWISHLIST", payload: item.id })
-              }
-            >
-              Remove
-            </button>
-          </div>
-        )} */}
+        
       </div>
     </div>
   );

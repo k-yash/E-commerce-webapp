@@ -1,8 +1,7 @@
 import "./filterbar.css";
 import "../style.css";
-// import 'react-toastify/dist/ReactToastify.css';
 import {useEffect, useState} from "react";
-import { successToast } from "../Card/toast";
+import { successToast, errorToast } from "../Card/toast";
 import { useProduct } from "../../Contexts/productContext";
 import { Card } from "../Card/card";
 import axios from "axios";
@@ -10,10 +9,10 @@ import FilterBar from "./filterbar";
 import LoadingPage from "../loadingpage";
 import { useAuth } from "../../Contexts/authContext";
 import {restApiCalls} from "../../Contexts/utilities/restApiCalls";
-// import {toast} from "react-toastify";
 
 
-export default function Products({ setRoute }) {
+
+export default function Products() {
   const { filteredData,dispatchProduct, setData } = useProduct();
   const {loading, setLoading}= useAuth();
 
@@ -24,13 +23,14 @@ export default function Products({ setRoute }) {
       setLoading(true);
       try{
         const response = await restApiCalls("GET","products"); 
-        console.log(response);
         setData(response.products);
-        successToast("Products loded successfully");
+        // successToast("Products loded successfully");
         dispatchProduct({type:"ADD_PRODUCTS", payload:response.products})
 
+
       }catch(err){
-        console.log("Page cannot be loaded");
+        // setData([]);
+        errorToast("Something went wrong!");
       }finally{
         setLoading(false);
       }
@@ -53,8 +53,6 @@ export default function Products({ setRoute }) {
               <Card
                 key={item.id}
                 item={item}
-                type="productShowcase"
-                setRoute={setRoute}
               />
               
               </>

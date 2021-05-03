@@ -24,3 +24,15 @@ export const errorToast = (text) =>{
         progress: undefined,
         });
 }
+
+export const infoToast = (text) =>{
+    return toast.info(text, {
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        });
+}

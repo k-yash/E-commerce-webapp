@@ -19,11 +19,11 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [isUserLogin, setLogin] = useState(false);
+  // const [isUserLogin, setLogin] = useState(false);
   const [user, setUser] = useState({
     userId:"",
     userName:"",
-    isUserLoggedIn:""
+    isUserLoggedIn:false
   })
   const navigate = useNavigate();
   // const [state, dispatch] = useReducer(authReducer, { Users });
@@ -47,21 +47,23 @@ export const AuthProvider = ({ children }) => {
   
   }
 
-  const AuthenticateWithCredentials = async (user, from) => {
+  const AuthenticateWithCredentials = async (users, from) => {
     try {
       setLoading(true);
-      const {data} = await axios.post("https://podkart.yash2018.repl.co/login",user);
+      const {data} = await axios.post("https://podkart.yash2018.repl.co/login",users);
       console.log(data);
       if(data.success){
-        localStorage.setItem("AuthForEcomm",JSON.stringify({"userId":data.userId ,"isUserLoggedIn":data.success, "userName": data.name}));
-       
-        setLogin(true);
+        localStorage.setItem("AuthForEcomm",JSON.stringify({"userId":data.userId , "userName": data.name, "isUserLoggedIn":data.success}));
+        
+        // console.log("hiiiiiiiiiiiiiiii", );
+        // setLogin(true);
+        setUser(JSON.parse(localStorage.getItem("AuthForEcomm")));
         successToast("Login Successful!");
         navigate(from);
       }
     } catch (err) {
       errorToast("User not found!")
-      localStorage.removeItem("AuthForEcomm");
+      localStorage?.removeItem("AuthForEcomm");
       setLogin(false);
     }finally{
       setLoading(false);
@@ -70,7 +72,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{user,setUser, isUserLogin,setLogin, AuthenticateWithCredentials, createUserCredentials, loading, setLoading }}
+      value={{user,setUser, AuthenticateWithCredentials, createUserCredentials, loading, setLoading }}
     >
       {children}
     </AuthContext.Provider>

@@ -6,11 +6,16 @@ import { useAuth } from "../../Contexts/authContext";
 
 export const NavBar = ({ setRoute }) => {
   const { state } = useCart();
-  const {isUserLogin, setLogin} = useAuth();
+  const {isUserLogin, setLogin, user, setUser} = useAuth();
 
   const logout =() =>{
-    setLogin(false);
-    localStorage.removeItem("AuthForEcomm");
+    // setLogin(false);
+    setUser({
+      userId:"",
+      userName:"",
+      isUserLoggedIn:false
+    });
+    localStorage?.removeItem("AuthForEcomm");
   }
 
   return (
@@ -23,12 +28,12 @@ export const NavBar = ({ setRoute }) => {
 
         <SearchBar setRoute={setRoute} />
 
-        {!isUserLogin?
+        {!user.isUserLoggedIn?
             <NavLink activeClassName="selected" to="/login" className="nav-btn">
               Login
             </NavLink>
           : <div className="right-menu">
-            <button className="username-btn">Hi, {JSON.parse(localStorage.getItem("AuthForEcomm")).userName}</button>
+            <button className="username-btn">Hi, {user.userName}</button>
             <div className="dropdown-menu"><button onClick={()=>{logout()}}>Log Out</button></div>
             </div> 
           }

@@ -21,26 +21,28 @@ export default function App() {
   
   const {isUserLogin, setLogin,user, setUser} = useAuth();
   const {dispatch} = useCart();
+  
 
 
 
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("AuthForEcomm")))
-    
-    if(localStorage.getItem("AuthForEcomm")){
-
-    const {isUserLoggedIn} = JSON.parse(localStorage.getItem("AuthForEcomm"));
-    setLogin(isUserLoggedIn);
-    }else{
-      setLogin(false);
+    if(localStorage?.getItem("AuthForEcomm")){
+      setUser(JSON.parse(localStorage?.getItem("AuthForEcomm")))
     }
+    // if(localStorage.getItem("AuthForEcomm")){
+
+    // const {isUserLoggedIn} = JSON.parse(localStorage.getItem("AuthForEcomm"));
+    // setLogin(isUserLoggedIn);
+    // }else{
+    //   setLogin(false);
+    // }
     
-  }, [isUserLogin])
+  }, [])
 
 
   useEffect(() => {
-    if(isUserLogin){
+    if(user.isUserLoggedIn){
      
       // const userId = JSON.parse(localStorage.getItem("AuthForEcomm")).userId;
       // console.log(userId)
@@ -49,7 +51,7 @@ export default function App() {
         try{
           const {data} = await axios.get(`https://podkart.yash2018.repl.co/cart/${user.userId}`)
           if(data.success){
-            console.log(data.response.cartProducts);
+            // console.log(data.response.cartProducts);
             dispatch({type:"SETCART", payload:data.response.cartProducts})
 
           }
@@ -61,10 +63,10 @@ export default function App() {
       dispatch({type:"SETCART", payload:[]})
     }
     
-  }, [isUserLogin])
+  }, [user.isUserLoggedIn])
 
   useEffect(() => {
-    if(isUserLogin){
+    if(user.isUserLoggedIn){
      
       // const userId = JSON.parse(localStorage.getItem("AuthForEcomm")).userId;
       // console.log(userId)
@@ -73,7 +75,7 @@ export default function App() {
         try{
           const {data} = await axios.get(`https://podkart.yash2018.repl.co/wishlist/${user.userId}`)
           if(data.success){
-            console.log(data.response);
+            // console.log(data.response);
             dispatch({type:"SETWISHLIST", payload:data.response.wishlistProducts})
 
           }
@@ -85,7 +87,7 @@ export default function App() {
       dispatch({type:"SETWISHLIST", payload:[]})
     }
     
-  }, [isUserLogin])
+  }, [user.isUserLoggedIn])
 
   return (
     <>
