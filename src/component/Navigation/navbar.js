@@ -1,4 +1,4 @@
-import commerce from "./commerce.png";
+import podkartLogo from "./podkartLogo.PNG";
 import { useCart } from "../../Contexts/cartContext";
 import { SearchBar } from "./searchBar";
 import { Link, NavLink } from "react-router-dom";
@@ -22,8 +22,7 @@ export const NavBar = ({ setRoute }) => {
     <div>
       <div className="nav-box">
         <Link to="/">
-          <img className="nav-logo" src={commerce} alt="" />
-          THE PODKaRT
+          <img className="nav-logo" src={podkartLogo} alt="" width="150px"  height="50px"/>
         </Link>
 
         <SearchBar setRoute={setRoute} />

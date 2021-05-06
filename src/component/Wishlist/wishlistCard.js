@@ -33,31 +33,36 @@ const wishListHandler = async(product) => {
   };
 
   return (
-    <div className="card-v" key={product.id}>
-      <img src={product.image} width="100%" height="auto" alt={product.name} />
-      <div className="content-card">
-        <div className="div1">
-          <p>{product.name}</p>
-          <p className="price">₹{product.price}</p>
-        </div>
-        <Rating rating={product.rating} />
+        <div class="product-card">
+
+          <Rating rating={product.rating} />
+
+          <div class="product">
+            <img src={product.image} height="190"/>
+          </div>
+
+          <div class="textp">
+            <div class="titlep">
+              <h3>{product.name}</h3>
+              <p className="price">₹{product.price}</p>
+            </div>
+          </div>
 
           <div>
-            <button
-              className="cart-btn btn-blue"
-              onClick={() => wishListHandler(product)}
-            >
-              Move to Cart
-            </button>
-            <button
-              className="cart-btn btn-red"
-              onClick={() => removeHandler()}
-            >
-              Remove
-            </button>
-          </div>
-        
-      </div>
-    </div>
+              <button
+                className="cart-btn btn-blue"
+                onClick={() => wishListHandler(product)}
+              >
+                Move to Cart
+              </button>
+              <button
+                className="cart-btn btn-red"
+                onClick={() => removeHandler()}
+              >
+                Remove
+              </button>
+            </div>
+        </div>
+
   );
 };

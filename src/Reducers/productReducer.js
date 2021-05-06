@@ -10,6 +10,12 @@ export const productReducer = (state, action) => {
   
       case "SORT_BY":
         return { ...state, sortBy: action.payload };
+
+      case "PRICE_RANGE":
+        return {...state, priceRange:action.payload};
+
+      case "SELECT_RATING":
+        return {...state, selectRating:action.payload}  
   
       default:
         return state;

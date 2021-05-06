@@ -37,44 +37,40 @@ export const Card = ({item}) => {
   }
 
   return (
-    <div className="card-v" key={item.id}>
-      <img src={item.image} width="100%" height="auto" alt={item.productName} />
-      <div className="content-card">
-        <div className="div1">
-          <p>{item.name}</p>
+
+    <div class="product-card" key={item.id}>
+
+      <Rating rating={item.rating} />
+
+			<div class="product">
+        <i
+          onClick={() => {user.isUserLoggedIn?addToWishlist():infoToast("Please login first!")} }
+          className="fa fa-heart wish-heart"
+          aria-hidden="true"
+          style={{ color: ifPresentWishlist(item.id) ? "red" : "grey" }}
+        ></i>
+				<img src={item.image} height="190"/>
+			</div>
+
+			<div class="textp">
+				<div class="titlep">
+					<h3>{item.name}</h3>
           <p className="price">₹{item.price}</p>
-        </div>
-        <Rating rating={item.rating} />
-        
-          <div className="div2">
-            <p>{item.description}</p>
-          </div>
-        
-
-        
-          <div className="div3">
-            {ifPresentCart(item.id) ? (
-              <Link to="/cart" className="cart-btn btn-red">
-                {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
-              </Link>
+				</div>
+        {ifPresentCart(item.id) ? (
+            <Link to="/cart" className="cart-btn btn-red">
+              {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
+            </Link>
             ) : (
-              <button
-                className="cart-btn btn-red"
-                onClick={() => {user.isUserLoggedIn?addToCart():infoToast("Please login first!")}}
-              >
-                {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
-              </button>
-            )}
+            <button
+              className="cart-btn btn-red"
+              onClick={() => {user.isUserLoggedIn?addToCart():infoToast("Please login first!")}}
+            >
+              {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
+            </button>)
+        }
+			</div>
+	  </div>
 
-            <i
-              onClick={() => {user.isUserLoggedIn?addToWishlist():infoToast("Please login first!")} }
-              className="fa fa-heart"
-              aria-hidden="true"
-              style={{ color: ifPresentWishlist(item.id) ? "red" : "grey" }}
-            ></i>
-          </div>
-        
-      </div>
-    </div>
   );
 };

@@ -5,7 +5,7 @@ import "./login.css";
 import LoadingPage from "../loadingpage";
 
 export const Login = () => {
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
   const {loading}= useAuth();
 
   const [loginUser, setLoginUser] = useState({
@@ -23,9 +23,9 @@ export const Login = () => {
   const { state } = useLocation();
   const { AuthenticateWithCredentials } = useAuth();
 
-  useEffect(() => {
-    inputRef.current.focus();
-  },[]);
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // },[]);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -93,7 +93,7 @@ export const Login = () => {
               type="email"
               name="email"
               placeholder="Email"
-              ref={inputRef}
+              // ref={inputRef}
             />
             <small>{formError.email}</small>
             <input

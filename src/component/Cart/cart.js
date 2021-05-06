@@ -57,8 +57,8 @@ export default function Cart() {
         </div>
       ) : (
         <div class="empty">
-          <h2>Hey, it feels so light!</h2>
-          <p>There is nothing in your Cart. Let's add some items.</p>
+          <h2>SO LONELY. SO ALONE.</h2>
+          <p>I am your shopping cart. I am empty.</p>
 
           <Link to="/products" className="cart-btn btn-red">
             GO TO PRODUCTS

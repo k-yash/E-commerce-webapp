@@ -8,7 +8,7 @@ import LoadingPage from "../loadingpage";
 
 
 export const SignUp = () => {
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
   const {loading}= useAuth();
   const [activeContainer, setActiveContainer] = useState(true);
   const { state } = useLocation();
@@ -26,9 +26,9 @@ export const SignUp = () => {
     password : ""
   })
 
-  useEffect(() => {
-    inputRef.current.focus();
-  },[]);
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // },[]);
 
   const isValidEmail=(email)=>{
     const emailRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
@@ -109,7 +109,7 @@ export const SignUp = () => {
               placeholder="Name"
               className="input-form "
               value={formData.name}
-              ref={inputRef}
+              // ref={inputRef}
             />
             <small>{formError.name}</small>
             <input

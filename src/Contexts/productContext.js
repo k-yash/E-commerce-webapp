@@ -6,13 +6,15 @@ const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
  
   const [
-    { products, sortBy, showInventoryAll, fastDeliveryOnly },
+    { products, sortBy, showInventoryAll, fastDeliveryOnly, priceRange, selectRating },
     dispatchProduct
   ] = useReducer(productReducer, {
     products:[],
     sortBy: null,
     showInventoryAll: true,
-    fastDeliveryOnly: false
+    fastDeliveryOnly: false,
+    priceRange:3000,
+    selectRating:1
   });
 
   const [data, setData] = useState(products);
@@ -38,17 +40,21 @@ export const ProductProvider = ({ children }) => {
 
   const getFilteredData = (
     productList,
-    { showInventoryAll, fastDeliveryOnly }
+    { showInventoryAll, fastDeliveryOnly, priceRange, selectRating }
   ) => {
     return productList
       .filter(({ inStock }) => (showInventoryAll ? true : inStock))
-      .filter(({ fastDelivery }) => (fastDeliveryOnly ? fastDelivery : true));
+      .filter(({ fastDelivery }) => (fastDeliveryOnly ? fastDelivery : true))
+      .filter(({price})=> (parseInt(price) < priceRange))
+      .filter(({rating})=>(parseInt(rating)>=selectRating))
   };
 
   const sortedData = getSortedData(data, sortBy);
   const filteredData = getFilteredData(sortedData, {
     showInventoryAll,
-    fastDeliveryOnly
+    fastDeliveryOnly,
+    priceRange,
+    selectRating
   });
   return (
     <ProductContext.Provider
@@ -58,6 +64,7 @@ export const ProductProvider = ({ children }) => {
         showInventoryAll,
         fastDeliveryOnly,
         onSearchData,
+        priceRange,
         setData
       }}
     >
