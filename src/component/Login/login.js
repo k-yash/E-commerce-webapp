@@ -7,6 +7,7 @@ import LoadingPage from "../loadingpage";
 export const Login = () => {
   // const inputRef = useRef(null);
   const {loading}= useAuth();
+  const [hidePassword, setHidePassword] = useState(false);
 
   const [loginUser, setLoginUser] = useState({
     email:"",
@@ -19,7 +20,7 @@ export const Login = () => {
   })
 
 
-  const [activeContainer, setActiveContainer] = useState(false);
+  // const [activeContainer, setActiveContainer] = useState(false);
   const { state } = useLocation();
   const { AuthenticateWithCredentials } = useAuth();
 
@@ -70,67 +71,83 @@ export const Login = () => {
   return (
     <>
     {loading?<LoadingPage/>:
-    <div className="content-page show-flex">
-      <div
-        className={` container  ${activeContainer ? "right-panel-active" : ""}`}
-        id="container"
-      >
-        
+    <div class="overlay content-page">
 
-        <div className="form-container sign-in-container">
-          <form onSubmit={formSubmitHandler}>
-            <h1>Sign In</h1>
-            {/* <div className="social-container">
-		<a href="#" className="social"><i className="fa fa-facebook"></i></a>
-		<a href="#" className="social"><i className="fa fa-google"></i></a>
-		<a href="#" className="social"><i className="fa fa-linkedin"></i></a>
-	</div>
-	<span>or use your account</span> */}
-            <input
-              onChange={inputEvent}
-              className="input-form "
-              value = {loginUser.email}
-              type="email"
-              name="email"
-              placeholder="Email"
-              // ref={inputRef}
-            />
-            <small>{formError.email}</small>
-            <input
-              onChange={inputEvent}
-              className="input-form "
-              value = {loginUser.password}
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-            <small>{formError.password}</small>
-            {/* <a href="#">Forgot Your Password</a> */}
+      <form onSubmit={formSubmitHandler}>
+        <div class="con">
+          <header class="head-form">
+              <h2>Log In</h2>
+              <p>login here using your username and password</p>
+          </header>
+          <br/>
+          <div class="field-set">
+            <span class="input-item">
+              <i class="fa fa-user-circle"></i>
+            </span>
 
-            <button className="button-form" onClick={() => loginHandler()}>
-              Sign In
-            </button>
-          </form>
-        </div>
-        <div className="overlay-container">
-          <div className="overlay">
-            
-            <div className="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p>Enter your details and start journey with us</p>
-              <Link
+            <input 
+            class="form-input" 
+            id="txt-input"
+            onChange={inputEvent} 
+            value = {loginUser.email}
+            type="email" 
+            name="email"
+            placeholder="@Email" 
+            required/>
+           
+            <br/>
+            <small className="formError">{formError.email}</small>
+            <span class="input-item">
+              <i class="fa fa-key"></i>
+            </span>
+
+            <input 
+            class="form-input" 
+            type={hidePassword ?"text": "password"}
+            onChange={inputEvent} 
+            value = {loginUser.password}
+            placeholder="Password" 
+            id="pwd"  
+            name="password" 
+            required/>
+
+            <span>
+            <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye" onClick={()=>{setHidePassword((val)=>!val)}}></i>
+            </span>
+            <br/>
+            <small className="formError">{formError.password}</small>
+            <button class="log-in" onClick={() => loginHandler()}> Log In </button>
+          </div>
+          <Link
                 to = "/signup"
-                
                 className="button-form ghost"
                 id="signUp"
               >
-                Sign Up
-              </Link>
-            </div>
-          </div>
+              Click here to create an account
+            </Link>
+        
+          {/* <div class="other">
+            <button class="btn submits frgt-pass">Forgot Password</button>
+            <button class="btn submits sign-up">
+            <Link
+                to = "/signup"
+                className="button-form ghost"
+                id="signUp"
+              >
+              Sign Up
+            </Link>
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </button>
+
+          </div> */}
+
         </div>
-      </div>
-    </div>}
+        
+
+      </form>
+
+    </div>
+    }
     </>
   );
   

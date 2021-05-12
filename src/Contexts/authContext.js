@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       errorToast("User not found!")
       localStorage?.removeItem("AuthForEcomm");
-      setLogin(false);
+      // setLogin(false);
     }finally{
       setLoading(false);
     }

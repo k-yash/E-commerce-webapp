@@ -13,7 +13,7 @@ export const ProductProvider = ({ children }) => {
     sortBy: null,
     showInventoryAll: true,
     fastDeliveryOnly: false,
-    priceRange:3000,
+    priceRange:3300,
     selectRating:1
   });
 

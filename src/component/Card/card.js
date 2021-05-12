@@ -58,12 +58,13 @@ export const Card = ({item}) => {
           <p className="price">₹{item.price}</p>
 				</div>
         {ifPresentCart(item.id) ? (
-            <Link to="/cart" className="cart-btn btn-red">
+          <button className="product-btn btn-red">
+            <Link className="product-link" to="/cart" >
               {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}
-            </Link>
+            </Link></button>
             ) : (
             <button
-              className="cart-btn btn-red"
+              className="product-btn btn-red"
               onClick={() => {user.isUserLoggedIn?addToCart():infoToast("Please login first!")}}
             >
               {ifPresentCart(item.id) ? "Go to Cart" : "Add to Cart"}

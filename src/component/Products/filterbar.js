@@ -9,6 +9,7 @@ const FilterBar = () => {
       <div className="filter-bar">
         <h3>Filters</h3>
         <fieldset>
+        <legend>Sort</legend>
           <div>
             <input
               className="input"
@@ -34,6 +35,7 @@ const FilterBar = () => {
         </fieldset>
 
         <fieldset>
+        <legend>Delivery</legend>
           <div>
             <input
               className="input"
@@ -53,14 +55,15 @@ const FilterBar = () => {
         </fieldset>
 
         <fieldset>
+        <legend>Price</legend>
           <div>
             <input
               className="input"
               type="range"
-              min="100"
-              max="1000"
+              min="300"
+              max="3300"
               value={priceRange}
-              step="100"
+              step="300"
               onChange={(event) =>
                 dispatchProduct({ type: "PRICE_RANGE", payload: event.target.value })
             }
@@ -70,10 +73,11 @@ const FilterBar = () => {
             {/* <label className="label">Fast Delivery</label> */}
           </div>
          
-          <label className="label">Price between 0 to {priceRange}</label>
+          <label className="label">Price between 300 to {priceRange}</label>
         </fieldset>
 
         <fieldset>
+        <legend>Rating</legend>
           <div>
             <input
               className="input"

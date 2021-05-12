@@ -10,9 +10,10 @@ import LoadingPage from "../loadingpage";
 export const SignUp = () => {
   // const inputRef = useRef(null);
   const {loading}= useAuth();
-  const [activeContainer, setActiveContainer] = useState(true);
+  // const [activeContainer, setActiveContainer] = useState(true);
   const { state } = useLocation();
   const {createUserCredentials } = useAuth();
+  const [hidePassword, setHidePassword] = useState(false)
 
   const [formData, setFormData] = useState({
     name:"",
@@ -55,7 +56,7 @@ export const SignUp = () => {
      }
 
      if(!formData.password || !isValidPassword){
-      setFormError((prev)=>({...prev, password: "Password must be 8 characters long and should contain a number " }))
+      setFormError((prev)=>({...prev, password: "must be 8 char long and should contain a number " }))
       userValidate = false;
     }
     if(!formData.name){
@@ -88,69 +89,90 @@ export const SignUp = () => {
 
   return (
     <>{loading?<LoadingPage/>:
-    <div className="content-page show-flex">
-    <div
-      className={` container  ${activeContainer ? "right-panel-active" : ""}`}
-      id="container"
-    >
-    <div className="form-container sign-up-container">
-          <form onSubmit={formSubmitHandler}>
-            <h1>Create Account</h1>
-            {/* <div className="social-container">
-                <a href="#" className="social"><i className="fa fa-facebook"></i></a>
-                <a href="#" className="social"><i className="fa fa-google"></i></a>
-                <a href="#" className="social"><i className="fa fa-linkedin"></i></a>
-              </div>
-              <span>or use your email for registration</span> */}
-            <input
-              type="text"
+      <div class="overlay content-page">
+        <form onSubmit={formSubmitHandler}>
+          <div class="con">
+            <header class="head-form">
+                <h2>Sign Up</h2>
+                <p>Sign Up here using your username and password</p>
+            </header>
+            <br/>
+            <div class="field-set">
+              <span class="input-item">
+                <i class="fa fa-user-circle"></i>
+              </span>
+
+              <input 
+              class="form-input" 
+              id="txt-input" 
+              type="text" 
               name="name"
               onChange={inputEvent}
               placeholder="Name"
-              className="input-form "
-              value={formData.name}
-              // ref={inputRef}
-            />
-            <small>{formError.name}</small>
-            <input
-              type="email"
+              value={formData.name} 
+              required/>
+              
+              <br/>
+              <small className="formError">{formError.name}</small>
+
+              <span class="input-item">
+                <i class="fa fa-user-circle"></i>
+              </span>
+
+              <input 
+              class="form-input" 
+              id="txt-input" 
+              type="email" 
               name="email"
               onChange={inputEvent}
               placeholder="Email"
-              className="input-form "
-              value={formData.email}
-            />
-            <small>{formError.email}</small>
-            <input
-              type="password"
-              name="password"
-              onChange={inputEvent}
-              placeholder="Password"
-              className="input-form "
-              value={formData.password}
-            />
-            <small>{formError.password}</small>
-            <button onClick={()=>{signupHandler()}} className="button-form">SignUp</button>
-          </form>
-        </div>
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p>
-                To keep connected with us please login with your personal info
-              </p>
-              <Link to = "/login"  className="button-form ghost"
-                id="signIn">
-                
-                Sign In
-              </Link>
-            </div>
+              value={formData.email} 
+              required/>
+
+              <br/>
+              <small className="formError">{formError.email}</small>
+    
+              <span class="input-item">
+              <i class="fa fa-key"></i>
+              </span>
             
+              <input 
+              class="form-input" 
+              type={hidePassword ?"text": "password"}
+              name="password"
+              onChange={inputEvent} 
+              placeholder="Password" 
+              id="pwd"  
+              value={formData.password} 
+              required/>
+
+              <span>
+                  <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye" onClick={()=>{setHidePassword((val)=>!val)}}></i>
+              </span>
+
+              <br/>
+              <small className="formError">{formError.password}</small>
+
+              <button class="log-in" onClick={()=>{signupHandler()}}> Log In </button>
+            </div>
+            <Link to = "/login"  className="button-form ghost"
+              id="signIn">
+              Already registered Click here!
+            </Link>
+        
+{/* 
+            <div class="other">
+                <button onClick={()=>{signupHandler()}} class="btn submits frgt-pass">Sign Up </button>
+                <button  class="btn submits sign-up">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </button>
+            </div> */}
           </div>
-        </div>
-        </div>
-        </div>}
-        </>
+        </form>
+      </div>
+       } </>
   );
 };
+
+
+

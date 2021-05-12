@@ -49,9 +49,11 @@ export default function Cart() {
               >
                 EMPTY CART
               </button>
+              <button className="cart-btn btn-blue">
               <Link to="/billing" className="cart-btn btn-blue">
                 CHECKOUT
               </Link>
+              </button>
             </div>
           </div>
         </div>

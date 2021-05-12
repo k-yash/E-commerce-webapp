@@ -60,7 +60,7 @@
   border: none;
   padding: 0.2rem 0.7rem;
   margin: 0.2rem;
-  font-size: 1.1rem;
+  font-size: .9rem;
   font-weight: 900;
   border-radius: 4px;
 }
@@ -70,18 +70,32 @@
 }
 
 .cart-btn {
-  padding: 0.4rem 0.3rem;
+  padding: 0.5rem .3rem;
   color: white;
   outline: none;
   border: none;
   border-radius: 5px;
 }
 
+.product-btn{
+  padding: 0.5rem 1.3rem;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.product-link{
+  outline: none;
+  color: white;
+  text-decoration: none;
+}
+
 .btn-red {
   background-color: #ff1e50;
   margin-left: 0.2rem;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: .9rem;
   cursor: pointer;
 }
 
@@ -89,7 +103,7 @@
   background-color: #2b4296;
   margin-left: 0.2rem;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: .9rem;
   cursor: pointer;
 }
 
@@ -159,7 +173,8 @@
 
 
 
- .product-card .textp p{color: rgba(0,0,0,0.7);}
+ .product-card .textp p{color: rgba(0,0,0,0.7);
+margin-bottom: 1rem;}
  .product-card .textp h3{margin: 15px 0px; font-size: 18px;}
  .product-card .textp{
 	text-align: center;
