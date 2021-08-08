@@ -1,0 +1,203 @@
+@import url("https://prism-ui.netlify.app/component.css");
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap");
+@import url("https://kit-pro.fontawesome.com/releases/v5.15.3/css/pro.min.css");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Titillium Web", sans-serif;
+}
+.body {
+  background-color: #f6f8f8;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.nav-logo {
+  width: 3rem;
+  margin: 0.2rem;
+  margin-left: 2rem;
+}
+
+.product-showcase {
+  display: flex;
+  /* margin: 0.6rem; */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nav-box {
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  justify-content: space-around;
+}
+
+.nav-btn {
+  margin: 0px;
+}
+
+.mob-nav-box {
+  display: none;
+}
+/* @media screen and (min-width: 820px) {
+
+} */
+
+@media screen and (max-width: 820px) {
+  .disable {
+    display: none;
+  }
+  .mob-nav-box {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    list-style: none;
+    justify-content: space-around;
+    background-color: white;
+    z-index: 1000;
+    height: 4rem;
+    align-items: center;
+    box-shadow: rgb(0 0 0 / 25%) 0px 0.0625em 0.0625em,
+      rgb(0 0 0 / 25%) 0px 0.125em 0.5em,
+      rgb(255 255 255 / 10%) 0px 0px 0px 1px inset;
+  }
+  .mob-nav-btn {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+  }
+
+  .mob-nav-btn:hover {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+  }
+  .link-box {
+    margin-right: 3rem;
+  }
+
+  .link-box {
+    padding: 0.4rem;
+    width: 60%;
+  }
+}
+.cart-last {
+  display: flex;
+  justify-content: space-around;
+}
+
+.selected {
+  color: #f3756d;
+}
+
+.selected i {
+  color: #f3756d;
+}
+
+.value > span {
+  position: relative;
+  color: white;
+  padding: 0px 4px;
+  background-color: red;
+  border-radius: 50%;
+  width: 9px;
+  height: 9px;
+  bottom: 0.7rem;
+  right: 0.3rem;
+  font-size: small;
+}
+
+.link-box {
+  padding: 0.4rem;
+  width: 41%;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.4rem;
+}
+
+
+
+.content-page {
+  margin-top: 4.5rem;
+  margin-bottom: 4.5rem;
+}
+
+.compact-rating {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.label {
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.empty {
+  margin-top: 2rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #f9fafb;
+  text-align: center;
+  padding: 1rem;
+}
+
+.empty h2 {
+  margin-bottom: 0;
+  border-bottom: 1px solid #dddddd;
+}
+
+.empty p {
+  font-size: 0.9rem;
+  margin: 1rem;
+}
+
+/* 
+<li>
+            <div className="right-menu"><button className="username-btn">Hi, {JSON.parse(localStorage.getItem("AuthForEcomm")).userName}</button> <div className="dropdown-menu"><button>LOG OUT</button></div></div> 
+          </li>} */
+
+
+.right-menu{
+   position: relative;
+}
+
+.username-btn{
+  padding-right: 1rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: larger;
+  font-weight: bold;
+  color: var(--primary-color);
+
+  
+}
+
+.dropdown-menu{
+  
+  display: none;
+  position: absolute;
+}
+
+.dropdown-menu button{
+  outline: none;
+  border: none;
+  background-color: #f3756d;
+  color: white;
+  padding: .4rem;
+}
+
+.right-menu:hover .dropdown-menu{
+  display: block;
+  /* background-color: cyan;
+  width: 5rem;
+  height: 5rem; */
+}
