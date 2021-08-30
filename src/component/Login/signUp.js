@@ -31,12 +31,12 @@ export const SignUp = () => {
   //   inputRef.current.focus();
   // },[]);
 
-  const isValidEmail=(email)=>{
+  const isValidEmail=()=>{
     const emailRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
-    return emailRegex.test(email);
+    return emailRegex.test(formData.email);
   }
 
-  const isValidPassword = (password) =>{
+  const isValidPassword = () =>{
     // const passwordRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
     // passwordRegex.test(password)
     return (password.length>7);
@@ -50,12 +50,12 @@ export const SignUp = () => {
     })
 
     let userValidate = true;
-     if(!formData.email || !isValidEmail){
+     if(!formData.email || !isValidEmail()){
        setFormError((prev)=>({...prev, email: "Enter a valid Email" }))
        userValidate = false;
      }
 
-     if(!formData.password || !isValidPassword){
+     if(!formData.password || !isValidPassword()){
       setFormError((prev)=>({...prev, password: "must be 8 char long and should contain a number " }))
       userValidate = false;
     }
