@@ -45,7 +45,7 @@ export const Login = () => {
       password : ""
     })
     let userValidate = true;
-     if(!loginUser.email){+
+     if(!loginUser.email){
        setFormError((prev)=>({...prev, email: "Enter a valid email" }))
        userValidate = false;
      }
