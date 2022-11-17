@@ -39,7 +39,7 @@ export const SignUp = () => {
   const isValidPassword = () =>{
     // const passwordRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
     // passwordRegex.test(password)
-    return (password.length>7);
+    return (formData.password.length>7);
   }
 
   const validateForm = () =>{
@@ -121,7 +121,7 @@ export const SignUp = () => {
 
               <input 
               class="form-input" 
-              id="txt-input" 
+              id="eml" 
               type="email" 
               name="email"
               onChange={inputEvent}
